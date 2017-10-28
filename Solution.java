@@ -42,16 +42,7 @@ public class Solution{
 		}
 		return new String(b);
 	}
-	// public static String SelectionSortIt(String s){
-	// 	char[] b = s.toCharArray();
-	// 	char temp='c' ;
-	// 	int a = s.length();
-	// 	for(int i=0;i<a;i++){
-	// 		for(int j=0;j<i;j++){
 
-	// 		}
-	// 	}		
-	// }
 	public static int convert(char s){
 		int y = (int)s;
 		if(y==39){
@@ -68,6 +59,9 @@ public class Solution{
 		return (Vector)c;
 	}
 	public static void main(String[] args){
+		long startTime = System.currentTimeMillis();
+
+
 		File f = new File(args[0]);
 		Object[][] o = new Object[38][13];
 		o[0] = null;
@@ -115,11 +109,46 @@ public class Solution{
 				}
 			}
 		}
-		//System.out.println(convert("'".charAt(0)));
-		//System.out.println(mainVocabulary[V]);
-		//System.out.println(SortIt(mainVocabulary[V]));
-		System.out.println(CastIt(((Object[])o[19][4])[23]));
-		//System.out.println((int)'z'+"-is a"+"\n"+(int)(("'").charAt(0))+" is apostraphi"+"\n"+(int)' '+"-is space "+"\n"+(int)'9'+"-is number 0");
-		System.out.println("all words entered");
+
+		File f2 = new File(args[1]);
+		Scanner g = null;
+		try{
+			g = new Scanner(f2);
+		}
+		catch(Exception e){
+			System.out.println("file not found");
+		}
+		int L = Integer.parseInt(g.nextLine());
+		String[] inputArr = new String[L];
+		String[] sortedInput = new String[L];
+		Vector<NumberStringCarrier> req =null;
+		for(int i=0;i<L;i++){
+			inputArr[i]=g.nextLine();
+			sortedInput[i]=SortIt(inputArr[i]);
+			PrintAnagram(sortedInput[i],o,req,mainVocabulary);
+		}
+
+long endTime   = System.currentTimeMillis();
+long totalTime = endTime - startTime;
+System.out.println(totalTime);
 	}
+
+	public static void PrintAnagram(String sortedInput,Object[][] o,Vector<NumberStringCarrier> req,String[] mainVocabulary){
+		int sizeOf = sortedInput.length();
+		char first = sortedInput.charAt(0);
+		if(sizeOf>=4)
+ req = CastIt(((Object[])(o[convert(first)][sizeOf]))[convert(sortedInput.charAt(sizeOf/2))]);
+		else
+req = CastIt(o[convert(first)][sizeOf]);
+		//System.out.println(sortedInput[0]);
+		for(int i =0;i<req.size();i++){
+			//System.out.println(mainVocabulary[(req.get(i)).index]);
+			if(sortedInput.equals((req.get(i)).wellOrder)){
+				System.out.println(mainVocabulary[(req.get(i)).index]);
+			}
+		}
+		System.out.println("-1");		
+	}
+
+
 }
