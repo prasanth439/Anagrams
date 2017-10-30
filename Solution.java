@@ -91,9 +91,15 @@ public class Solution{
 		int size =0;
 		int V = Integer.parseInt(s.nextLine());
 		String[] mainVocabulary = new String[V+1];
+		String solo = null;
 		mainVocabulary[0] = null;
 		for(int i = 1;i<= V;i++){
-			mainVocabulary[i] = s.nextLine();
+			solo = s.nextLine();
+			if(solo.length()<=12)
+			mainVocabulary[i] = solo;
+			else{
+				continue;
+			}
 			size = mainVocabulary[i].length();
 			if(size<=12){
 				cargo = SortIt(mainVocabulary[i]);
